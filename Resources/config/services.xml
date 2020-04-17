@@ -12,7 +12,7 @@
 
         <service id="dubture_customer_io.request" class="Customerio\Request" public="false"/>
 
-        <service id="dubture_customer_io.api" class="Customerio\Api">
+        <service id="dubture_customer_io.api" class="Customerio\Client">
             <argument>%customerio.site_id%</argument>
             <argument>%customerio.api_key%</argument>
             <argument type="service" id="dubture_customer_io.request" />

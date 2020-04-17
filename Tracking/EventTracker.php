@@ -61,10 +61,10 @@ class EventTracker implements EventSubscriberInterface
         $options = ['id' => $customer->getId(),'email' => $customer->getEmail()];
         $options = array_merge($options, $customer->getCustomerAttributes());
 
-        $response = $this->api->customers->add($options);
-
-        if (!$response->success()) {
-            throw new BadRequestHttpException($response->message());
+        try {
+            $this->api->customers->add($options);
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            throw new BadRequestHttpException($e->getMessage());
         }
     }
 
@@ -81,20 +81,21 @@ class EventTracker implements EventSubscriberInterface
                 . $event->getAction(), $event->getAttributes());
 
         $customer = $event->getCustomer();
-        if ($customer) {
-            $data = array_merge($event->getAttributes(), $customer->getCustomerAttributes());
-            $options = ['id' => $customer->getId(), 'name' => $event->getAction(), 'data' => $data];
 
-            $response = $this->api->customers->event($options);
-        } else {
-            $options = ['action' => $event->getAction()];
-            $options = array_merge($options, $event->getAttributes());
+        try {
+            if ($customer) {
+                $data = array_merge($event->getAttributes(), $customer->getCustomerAttributes());
+                $options = ['id' => $customer->getId(), 'name' => $event->getAction(), 'data' => $data];
 
-            $response = $this->api->events->anonymous($options);
-        }
+                $this->api->customers->event($options);
+            } else {
+                $options = ['action' => $event->getAction()];
+                $options = array_merge($options, $event->getAttributes());
 
-        if (!$response->success()) {
-            throw new BadRequestHttpException($response->message());
+                $this->api->events->anonymous($options);
+            }
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            throw new BadRequestHttpException($e->getMessage());
         }
     }
 

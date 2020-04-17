@@ -80,10 +80,18 @@ class EventTracker implements EventSubscriberInterface
         $this->logger->info('Firing customerio event '
                 . $event->getAction(), $event->getAttributes());
 
-        $options = ['action' => $event->getAction()];
-        $options = array_merge($options, $event->getAttributes());
+        $customer = $event->getCustomer();
+        if ($customer) {
+            $data = array_merge($event->getAttributes(), $customer->getCustomerAttributes());
+            $options = ['id' => $customer->getId(), 'name' => $event->getAction(), 'data' => $data];
 
-        $response = $this->api->events->anonymous($options);
+            $response = $this->api->customers->event($options);
+        } else {
+            $options = ['action' => $event->getAction()];
+            $options = array_merge($options, $event->getAttributes());
+
+            $response = $this->api->events->anonymous($options);
+        }
 
         if (!$response->success()) {
             throw new BadRequestHttpException($response->message());

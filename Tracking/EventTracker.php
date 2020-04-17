@@ -113,8 +113,8 @@ class EventTracker implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-                TrackingEvent::IDENTIFY => 'onIdentify',
-                TrackingEvent::ACTION   => 'onAction',
+                TrackingEvent::IDENTIFY => array(array('onIdentify', 80)),
+                TrackingEvent::ACTION   => array(array('onAction', 81)),
         );
     }
 }

@@ -11,8 +11,8 @@
     <services>
 
         <service id="dubture_customer_io.api" class="Customerio\Client">
-            <argument>%customerio.site_id%</argument>
             <argument>%customerio.api_key%</argument>
+            <argument>%customerio.site_id%</argument>
         </service>
 
         <service id="dubture_customer_io.tracker" class="%dubture_customer_io.tracker.class%">

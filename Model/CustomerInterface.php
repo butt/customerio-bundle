@@ -31,6 +31,6 @@ interface CustomerInterface
     /**
      * @return array
      */
-    function getAttributes();
+    function getCustomerAttributes();
 
 }

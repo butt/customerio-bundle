@@ -56,7 +56,7 @@ class TestCustomer implements CustomerInterface
         return $this->email;
     }
 
-    public function getAttributes()
+    public function getCustomerAttributes()
     {
         return $this->attributes;
     }

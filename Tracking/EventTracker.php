@@ -56,10 +56,10 @@ class EventTracker implements EventSubscriberInterface
         $dispatcher->dispatch('customerio.beforeCreateCustomer', $event);
 
         $this->logger->info('Sending createCustomer request to customer.io with id '
-                . $customer->getId(), $customer->getAttributes());
+                . $customer->getId(), $customer->getCustomerAttributes());
 
         $options = ['id' => $customer->getId(),'email' => $customer->getEmail()];
-        $options = array_merge($options, $customer->getAttributes());
+        $options = array_merge($options, $customer->getCustomerAttributes());
 
         $response = $this->api->customers->add($options);
 

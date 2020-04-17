@@ -31,7 +31,7 @@ class EventTrackerTest extends WebTestCase
         static::$kernel = static::createKernel();
         static::$kernel->boot();
 
-        $api = $this->getMockBuilder('\Customerio\Api')->disableOriginalConstructor()->getMock();
+        $api = $this->getMockBuilder('\Customerio\Client')->disableOriginalConstructor()->getMock();
 
         $response = $this->getMockBuilder('\Customerio\Response')->disableOriginalConstructor()->getMock();
 
@@ -60,7 +60,7 @@ class EventTrackerTest extends WebTestCase
         static::$kernel = static::createKernel();
         static::$kernel->boot();
 
-        $api = $this->getMockBuilder('\Customerio\Api')->disableOriginalConstructor()->getMock();
+        $api = $this->getMockBuilder('\Customerio\Client')->disableOriginalConstructor()->getMock();
 
         $response = $this->getMockBuilder('\Customerio\Response')->disableOriginalConstructor()->getMock();
 
@@ -86,7 +86,7 @@ class EventTrackerTest extends WebTestCase
         static::$kernel = static::createKernel();
         static::$kernel->boot();
 
-        $api = $this->getMockBuilder('\Customerio\Api')->disableOriginalConstructor()->getMock();
+        $api = $this->getMockBuilder('\Customerio\Client')->disableOriginalConstructor()->getMock();
 
         $response = $this->getMockBuilder('\Customerio\Response')->disableOriginalConstructor()->getMock();
 

@@ -10,7 +10,7 @@
   "license": "MIT",
   "require": {
     "symfony/framework-bundle": ">=2.3",
-    "userscape/customerio": "~1.0"
+    "printu/customerio": "~2.2"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.5",
